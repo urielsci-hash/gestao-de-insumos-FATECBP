@@ -12,53 +12,43 @@
     }
     ::-webkit-scrollbar { display: none; }
   </style>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "surface": "#f6faff",
-            "surface-container-lowest": "#ffffff",
-            "surface-container-low": "#eaf5ff",
-            "surface-container": "#dff0ff",
-            "surface-container-high": "#d3ebff",
-            "surface-bright": "#f6faff",
-            "on-surface": "#001e2e",
-            "on-surface-variant": "#434654",
-            "outline": "#747686",
-            "outline-variant": "#c4c5d7",
-            "border-subtle": "#E2E8F0",
-            "primary": "#214ed7",
-            "primary-container": "#4369f1",
-            "on-primary": "#ffffff",
-            "secondary": "#1c00eb",
-            "tertiary": "#426820",
-            "inverse-surface": "#00344c",
-            "inverse-on-surface": "#e4f3ff"
-          },
-          borderRadius: {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "2xl": "1rem",
-            "full": "9999px"
-          },
-          fontFamily: {
-            "display-lg": ["Montserrat", "sans-serif"],
-            "headline-md": ["Montserrat", "sans-serif"],
-            "headline-sm": ["Montserrat", "sans-serif"],
-            "body-lg": ["Inter", "sans-serif"],
-            "body-md": ["Inter", "sans-serif"],
-            "body-sm": ["Inter", "sans-serif"],
-            "label-lg": ["Inter", "sans-serif"],
-            "label-md": ["Inter", "sans-serif"],
-            "label-sm": ["Inter", "sans-serif"]
-          }
-        }
+<script type="module">
+    import { supabase } from './js/supabase.js';
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) window.location.href = 'painel.html';
+    });
+
+    window.togglePasswordVisibility = function() {
+      const p = document.getElementById('corporatePassword');
+      const e = document.getElementById('eyeIcon');
+      if (p.type === 'password') { p.type = 'text'; e.textContent = 'visibility_off'; } 
+      else { p.type = 'password'; e.textContent = 'visibility'; }
+    }
+
+    window.fillProfile = function(role) {
+      document.getElementById('corporateEmail').value = role === 'admin' ? 'admin.ti@insumos.org' : 'colaborador@insumos.org';
+      document.getElementById('corporatePassword').value = role === 'admin' ? 'Gestor#TI2024!' : 'Requisicao#2024';
+    }
+
+    window.handleLoginSubmit = async function() {
+      const email = document.getElementById('corporateEmail').value;
+      const password = document.getElementById('corporatePassword').value;
+      const btn = document.getElementById('btnSubmit');
+      
+      if (!email || !password) return;
+      btn.innerHTML = 'Entrando...';
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      
+      if (error) {
+        btn.innerHTML = 'Erro no Login';
+        alert('E-mail ou senha inválidos.');
+      } else {
+        btn.innerHTML = 'Acesso Autorizado!';
+        window.location.href = 'painel.html';
       }
-    };
+    }
   </script>
 </head>
 <body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col justify-between antialiased selection:bg-primary selection:text-white">
