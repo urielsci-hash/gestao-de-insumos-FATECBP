@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container": "#dff0ff",
+            "surface-dim": "#b4e0ff",
+            "error-container": "#ffdad6",
+            "outline-variant": "#c4c5d7",
+            "secondary-fixed": "#e1e0ff",
+            "secondary-fixed-dim": "#c0c1ff",
+            "status-rejected-bg": "#FEE2E2",
+            "secondary-container": "#3d3aff",
+            "alert-low-stock-text": "#C2410C",
+            "surface-container-high": "#d3ebff",
+            "inverse-on-surface": "#e4f3ff",
+            "tertiary-fixed": "#c2f097",
+            "status-rejected-text": "#991B1B",
+            "surface-card": "#FFFFFF",
+            "border-subtle": "#E2E8F0",
+            "surface-variant": "#c7e7ff",
+            "surface-page": "#F6F8FA",
+            "on-secondary-fixed-variant": "#1c00eb",
+            "error": "#ba1a1a",
+            "surface-bright": "#f6faff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#0038b8",
+            "status-approved-text": "#3730A3",
+            "inverse-surface": "#00344c",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#434654",
+            "on-tertiary-container": "#020700",
+            "on-tertiary-fixed-variant": "#2b5007",
+            "status-pending-bg": "#FEF3C7",
+            "primary-fixed": "#dde1ff",
+            "on-error": "#ffffff",
+            "alert-low-stock-bg": "#FFEDD5",
+            "outline": "#747686",
+            "tertiary-container": "#5a8236",
+            "primary": "#466CF4",
+            "on-primary-container": "#fffbff",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#466CF4",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#001453",
+            "tertiary": "#426820",
+            "on-tertiary-fixed": "#0d2000",
+            "surface-container-highest": "#c7e7ff",
+            "background": "#f6faff",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#a7d47e",
+            "neutral-tint": "#C7D0C5",
+            "status-delivered-bg": "#DCFCE7",
+            "on-surface": "#001e2e",
+            "status-approved-bg": "#E0E7FF",
+            "status-delivered-text": "#166534",
+            "primary-container": "#4369f1",
+            "on-secondary-fixed": "#07006c",
+            "surface": "#f6faff",
+            "inverse-primary": "#b7c4ff",
+            "on-background": "#001e2e",
+            "primary-fixed-dim": "#b7c4ff",
+            "status-pending-text": "#92400E",
+            "surface-container-low": "#eaf5ff",
+            "secondary": "#1c00eb",
+            "on-secondary-container": "#d6d5ff"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "gutter-desktop": "1.5rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "margin": "1rem",
+            "margin-desktop": "2rem",
+            "space-md": "1rem"
+          },
+          fontFamily: {
+            "headline-sm": ["Montserrat", "sans-serif"],
+            "headline-lg": ["Montserrat", "sans-serif"],
+            "headline-md": ["Montserrat", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "tabular-numeric": ["Inter", "sans-serif"],
+            "display-lg-mobile": ["Montserrat", "sans-serif"],
+            "display-lg": ["Montserrat", "sans-serif"],
+            "label-sm": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "label-lg": ["Inter", "sans-serif"]
+          },
+          fontSize: {
+            "headline-sm": ["16px", { lineHeight: "24px", fontWeight: "600" }],
+            "headline-lg": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+            "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+            "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+            "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "tabular-numeric": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+            "display-lg-mobile": ["26px", { lineHeight: "32px", fontWeight: "700" }],
+            "display-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+            "label-sm": ["11px", { lineHeight: "14px", fontWeight: "600" }],
+            "label-md": ["12px", { lineHeight: "16px", fontWeight: "600" }],
+            "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "label-lg": ["14px", { lineHeight: "20px", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen">
+<!-- Cabeçalho limpo com logo IMAGE_13 -->
+<header class="w-full bg-surface-card border-b border-border-subtle sticky top-0 z-40 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+<div class="max-w-[1100px] mx-auto px-margin md:px-gutter-desktop h-16 flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-lg">
+<a class="flex items-center gap-2.5" href="#">
+<img alt="Controle de Insumos Logo" class="h-9 w-9 object-contain rounded-lg shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClP2Y-2IgSiMll4W6VIjrf1t7H2enzbSweaOXu5sH97LyoIGBdF3hILdWcVufrJsRbLJB5yc1pGmISA1-WDJy_HIgPAHnpmlkyAlsAh0Ssvh6yf5bE4HXu8DNQhL4mEzGWOO_aTORReFlF6pMfhvGy6LAg_aehe53cptfuGQvC8V3SLa3eR9pulsh3FTd-W5E_nU1VrDwU8NZq6HWuejCWVv98AkXz_N16RrvXURCbN1yHnS6Z41j-6-JVj3Vtq3DwVVs"/>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Controle de Insumos</span>
+</a>
+<nav class="hidden md:flex items-center gap-1">
+<a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors" data-path="painel-de-requisicoes" href="#">Painel de Requisições</a>
+<a class="px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-md text-label-md font-semibold" data-path="nova-requisicao" href="#">Nova Requisição</a>
+<div class="flex items-center gap-1.5">
+<a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low font-label-md text-label-md transition-colors" data-path="estoque-e-materiais" href="#">Estoque &amp; Materiais</a>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-status-approved-bg text-status-approved-text tracking-wide uppercase">Admin</span>
+</div>
+</nav>
+</div>
+<!-- Usuário discreto -->
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-2 pr-2 border-r border-border-subtle">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-xs">
+            GT
+          </div>
+<div class="hidden sm:flex flex-col text-left">
+<span class="font-label-md text-label-md text-on-surface leading-tight font-medium">Gestor de TI</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant leading-tight">TI Almoxarifado</span>
+</div>
+</div>
+<a class="flex items-center gap-1 text-on-surface-variant hover:text-on-surface p-1.5 rounded-lg hover:bg-surface-container transition-colors" data-path="autenticacao" href="#" title="Sair">
+<span class="material-symbols-outlined text-headline-sm">logout</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Conteúdo Centralizado e Enxuto -->
+<main class="flex-1 w-full bg-surface py-space-lg md:py-space-xl px-margin">
+<div class="max-w-[680px] mx-auto space-y-space-md">
+<!-- Topo: Botão voltar sutil + Título direto -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<a class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors mb-1 group" data-path="painel-de-requisicoes" href="#">
+<span class="material-symbols-outlined text-base group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+<span>Voltar ao Painel</span>
+</a>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Nova Requisição de Material</h1>
+</div>
+</div>
+<!-- Container do Formulário Enxuto -->
+<div class="bg-surface-card rounded-xl border border-border-subtle shadow-sm p-space-md md:p-space-lg">
+<form class="space-y-space-lg" id="requestForm" onsubmit="event.preventDefault(); handleSubmit();">
+<!-- Campo 1: Material -->
+<div class="space-y-1.5">
+<label class="block font-label-lg text-label-lg text-on-surface" for="materialSelect">
+              Material Solicitado <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 pl-3.5 pr-9 rounded-lg border border-border-subtle bg-surface-card text-on-surface font-body-md text-body-md appearance-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer" id="materialSelect" onchange="handleMaterialChange(this.value)" required="">
+<option disabled="" selected="" value="">Selecione um material ativo...</option>
+<option data-category="Papelaria / Escritório" data-stock="142" data-unit="resmas" value="mat-1">Resma Papel A4 75g (Saldo: 142 resmas)</option>
+<option data-category="Tecnologia &amp; Periféricos" data-stock="8" data-unit="un" value="mat-2">Mouse Óptico USB Dell MS116 (Saldo: 8 un)</option>
+<option data-category="Impressão / Consumíveis" data-stock="2" data-unit="un" value="mat-3">Toner HP LaserJet 105A (Saldo: 2 un)</option>
+<option data-category="Papelaria / Escritório" data-stock="25" data-unit="cx" value="mat-4">Caneta Esferográfica BIC Azul (Saldo: 25 cx)</option>
+<option data-category="Tecnologia &amp; Periféricos" data-stock="1" data-unit="un" value="mat-5">Teclado USB Dell KB216 (Saldo: 1 un)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-xl">expand_more</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center justify-between" id="materialHelperText">
+<span>Apenas materiais ativos em estoque.</span>
+<span class="hidden font-medium text-tertiary" id="currentStockNotice"></span>
+</p>
+</div>
+<!-- Campo 2: Quantidade com limite do saldo -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="block font-label-lg text-label-lg text-on-surface" for="quantityInput">
+                Quantidade <span class="text-error">*</span>
+</label>
+<span class="font-body-sm text-[12px] text-on-surface-variant" id="maxLimitText">
+                Selecione o material para definir o limite
+              </span>
+</div>
+<div class="flex items-center gap-3">
+<div class="inline-flex items-center rounded-lg border border-border-subtle bg-surface-page p-1">
+<button class="w-9 h-9 rounded bg-surface-card border border-border-subtle text-on-surface hover:bg-surface-container-low flex items-center justify-center transition-all disabled:opacity-40" disabled="" id="btnMinus" onclick="adjustQty(-1)" type="button">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<input class="w-16 text-center bg-transparent font-tabular-numeric text-tabular-numeric text-on-surface font-semibold focus:outline-none" disabled="" id="quantityInput" min="1" oninput="validateQuantity()" required="" type="number" value="1"/>
+<button class="w-9 h-9 rounded bg-surface-card border border-border-subtle text-on-surface hover:bg-surface-container-low flex items-center justify-center transition-all disabled:opacity-40" disabled="" id="btnPlus" onclick="adjustQty(1)" type="button">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="unitLabel"></span>
+</div>
+<div class="hidden text-xs text-error font-medium pt-1 flex items-center gap-1" id="qtyErrorAlert">
+<span class="material-symbols-outlined text-sm">error</span>
+<span id="qtyErrorMessage">Quantidade excede o saldo disponível.</span>
+</div>
+</div>
+<!-- Campo 3: Justificativa (Opcional) -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="block font-label-lg text-label-lg text-on-surface" for="justification">
+                Justificativa
+              </label>
+<span class="text-on-surface-variant font-body-sm text-xs">Opcional</span>
+</div>
+<textarea class="w-full p-3 rounded-lg border border-border-subtle bg-surface-card text-on-surface font-body-md text-body-md placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none" id="justification" oninput="updateSummary()" placeholder="Ex.: Reposição de insumos para atendimento ao cliente." rows="2"></textarea>
+</div>
+<!-- Mini card de Resumo Compacto -->
+<div class="rounded-lg bg-surface-container-low/70 border border-border-subtle p-3.5 space-y-2 text-body-sm">
+<div class="font-label-md text-xs font-semibold uppercase text-on-surface-variant tracking-wider">
+              Resumo da Solicitação
+            </div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 border-t border-border-subtle/60 text-xs">
+<div>
+<span class="text-on-surface-variant block">Solicitante:</span>
+<span class="font-semibold text-on-surface">Gestor de TI</span>
+</div>
+<div>
+<span class="text-on-surface-variant block">Material:</span>
+<span class="font-semibold text-on-surface truncate block" id="summaryMaterial">Não selecionado</span>
+</div>
+<div>
+<span class="text-on-surface-variant block">Qtd. Solicitada:</span>
+<span class="font-semibold text-on-surface font-tabular-numeric" id="summaryQty">-</span>
+</div>
+<div>
+<span class="text-on-surface-variant block">Saldo Restante:</span>
+<span class="font-semibold text-tertiary font-tabular-numeric" id="summaryRemaining">-</span>
+</div>
+</div>
+</div>
+<!-- Ações limpas -->
+<div class="pt-2 flex items-center justify-end gap-3">
+<a class="px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-page font-label-md text-label-md transition-colors" data-path="painel-de-requisicoes" href="#">
+              Cancelar
+            </a>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-1.5 disabled:opacity-50 disabled:pointer-events-none" disabled="" id="submitBtn" type="submit">
+<span class="material-symbols-outlined text-lg">send</span>
+<span>Enviar Requisição</span>
+</button>
+</div>
+</form>
+<!-- Banner de Sucesso pós-envio -->
+<div class="hidden py-space-md text-center space-y-space-md" id="successBanner">
+<div class="w-12 h-12 rounded-full bg-status-delivered-bg text-status-delivered-text flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined text-2xl">check_circle</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Requisição Criada com Sucesso!</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+              O pedido foi protocolado e encaminhado para despacho.
+            </p>
+</div>
+<div class="flex items-center justify-center gap-3 pt-2">
+<button class="px-4 py-2 rounded-lg border border-border-subtle bg-surface-card hover:bg-surface-page text-on-surface font-label-md text-label-md transition-colors" onclick="resetForm()">
+              Nova Solicitação
+            </button>
+<a class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md transition-colors" data-path="painel-de-requisicoes" href="#">
+              Ir para o Painel
+            </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Rodapé limpo -->
+<footer class="w-full border-t border-border-subtle py-4 bg-surface-card">
+<div class="max-w-[1100px] mx-auto px-margin md:px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-2 text-on-surface-variant text-xs font-body-sm">
+<span>© 2025 Controle de Insumos.</span>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span> Almoxarifado Online
+        </span>
+</div>
+</div>
+</footer>
+<script>
+    let currentSelectedMaterial = null;
+
+    function handleMaterialChange(val) {
+      const select = document.getElementById('materialSelect');
+      const selectedOption = select.options[select.selectedIndex];
+      
+      if (!selectedOption || !selectedOption.dataset.stock) return;
+
+      const stock = parseInt(selectedOption.dataset.stock, 10);
+      const unit = selectedOption.dataset.unit;
+      const category = selectedOption.dataset.category;
+
+      currentSelectedMaterial = {
+        name: selectedOption.text.split('(')[0].trim(),
+        stock: stock,
+        unit: unit,
+        category: category
+      };
+
+      const stockNotice = document.getElementById('currentStockNotice');
+      stockNotice.classList.remove('hidden');
+      stockNotice.textContent = `Disponível: ${stock} ${unit}`;
+
+      const qtyInput = document.getElementById('quantityInput');
+      qtyInput.disabled = false;
+      qtyInput.max = stock;
+      qtyInput.value = 1;
+
+      document.getElementById('btnMinus').disabled = false;
+      document.getElementById('btnPlus').disabled = false;
+      document.getElementById('maxLimitText').textContent = `Limite máximo: ${stock} ${unit}`;
+      document.getElementById('unitLabel').textContent = unit;
+
+      validateQuantity();
+      updateSummary();
+    }
+
+    function adjustQty(delta) {
+      if (!currentSelectedMaterial) return;
+      const qtyInput = document.getElementById('quantityInput');
+      let currentVal = parseInt(qtyInput.value, 10) || 1;
+      let max = currentSelectedMaterial.stock;
+      
+      let newVal = currentVal + delta;
+      if (newVal >= 1 && newVal <= max) {
+        qtyInput.value = newVal;
+        validateQuantity();
+      }
+    }
+
+    function validateQuantity() {
+      const qtyInput = document.getElementById('quantityInput');
+      const errorBox = document.getElementById('qtyErrorAlert');
+      const errorMessage = document.getElementById('qtyErrorMessage');
+      const submitBtn = document.getElementById('submitBtn');
+
+      let currentVal = parseInt(qtyInput.value, 10);
+
+      if (!currentSelectedMaterial) {
+        submitBtn.disabled = true;
+        return;
+      }
+
+      if (isNaN(currentVal) || currentVal <= 0) {
+        errorBox.classList.remove('hidden');
+        errorMessage.textContent = "Informe ao menos 1 unidade.";
+        submitBtn.disabled = true;
+        return;
+      }
+
+      if (currentVal > currentSelectedMaterial.stock) {
+        errorBox.classList.remove('hidden');
+        errorMessage.textContent = `Máximo permitido: ${currentSelectedMaterial.stock} ${currentSelectedMaterial.unit}.`;
+        submitBtn.disabled = true;
+      } else {
+        errorBox.classList.add('hidden');
+        submitBtn.disabled = false;
+      }
+
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const summaryMaterial = document.getElementById('summaryMaterial');
+      const summaryQty = document.getElementById('summaryQty');
+      const summaryRemaining = document.getElementById('summaryRemaining');
+
+      if (currentSelectedMaterial) {
+        const qty = parseInt(document.getElementById('quantityInput').value, 10) || 0;
+        summaryMaterial.textContent = currentSelectedMaterial.name;
+        summaryQty.textContent = `${qty} ${currentSelectedMaterial.unit}`;
+        const diff = currentSelectedMaterial.stock - qty;
+        summaryRemaining.textContent = `${Math.max(0, diff)} ${currentSelectedMaterial.unit}`;
+      } else {
+        summaryMaterial.textContent = "Não selecionado";
+        summaryQty.textContent = "-";
+        summaryRemaining.textContent = "-";
+      }
+    }
+
+    function handleSubmit() {
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <span class="inline-block w-4 h-4 border-2 border-on-primary border-t-transparent rounded-full animate-spin"></span>
+        <span>Enviando...</span>
+      `;
+
+      setTimeout(() => {
+        document.getElementById('requestForm').classList.add('hidden');
+        document.getElementById('successBanner').classList.remove('hidden');
+      }, 600);
+    }
+
+    function resetForm() {
+      document.getElementById('requestForm').reset();
+      document.getElementById('requestForm').classList.remove('hidden');
+      document.getElementById('successBanner').classList.add('hidden');
+      
+      currentSelectedMaterial = null;
+      document.getElementById('quantityInput').disabled = true;
+      document.getElementById('quantityInput').value = 1;
+      document.getElementById('btnMinus').disabled = true;
+      document.getElementById('btnPlus').disabled = true;
+      document.getElementById('submitBtn').disabled = true;
+      document.getElementById('submitBtn').innerHTML = `
+        <span class="material-symbols-outlined text-lg">send</span>
+        <span>Enviar Requisição</span>
+      `;
+      document.getElementById('currentStockNotice').classList.add('hidden');
+      document.getElementById('maxLimitText').textContent = 'Selecione o material para definir o limite';
+      document.getElementById('unitLabel').textContent = '';
+      updateSummary();
+    }
+  </script>
+</body></html>

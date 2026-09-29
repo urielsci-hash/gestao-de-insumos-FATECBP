@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#dff0ff",
+            "surface-dim": "#b4e0ff",
+            "error-container": "#ffdad6",
+            "outline-variant": "#c4c5d7",
+            "secondary-fixed": "#e1e0ff",
+            "secondary-fixed-dim": "#c0c1ff",
+            "status-rejected-bg": "#FEE2E2",
+            "secondary-container": "#3d3aff",
+            "alert-low-stock-text": "#C2410C",
+            "surface-container-high": "#d3ebff",
+            "inverse-on-surface": "#e4f3ff",
+            "tertiary-fixed": "#c2f097",
+            "status-rejected-text": "#991B1B",
+            "surface-card": "#FFFFFF",
+            "border-subtle": "#E2E8F0",
+            "surface-variant": "#c7e7ff",
+            "surface-page": "#F6F8FA",
+            "on-secondary-fixed-variant": "#1c00eb",
+            "error": "#ba1a1a",
+            "surface-bright": "#f6faff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#0038b8",
+            "status-approved-text": "#3730A3",
+            "inverse-surface": "#00344c",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#434654",
+            "on-tertiary-container": "#020700",
+            "on-tertiary-fixed-variant": "#2b5007",
+            "status-pending-bg": "#FEF3C7",
+            "primary-fixed": "#dde1ff",
+            "on-error": "#ffffff",
+            "alert-low-stock-bg": "#FFEDD5",
+            "outline": "#747686",
+            "tertiary-container": "#5a8236",
+            "primary": "#214ed7",
+            "on-primary-container": "#fffbff",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#2551d9",
+            "on-primary": "#ffffff",
+            "on-primary-fixed": "#001453",
+            "tertiary": "#426820",
+            "on-tertiary-fixed": "#0d2000",
+            "surface-container-highest": "#c7e7ff",
+            "background": "#f6faff",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#a7d47e",
+            "neutral-tint": "#C7D0C5",
+            "status-delivered-bg": "#DCFCE7",
+            "on-surface": "#001e2e",
+            "status-approved-bg": "#E0E7FF",
+            "status-delivered-text": "#166534",
+            "primary-container": "#4369f1",
+            "on-secondary-fixed": "#07006c",
+            "surface": "#f6faff",
+            "inverse-primary": "#b7c4ff",
+            "on-background": "#001e2e",
+            "primary-fixed-dim": "#b7c4ff",
+            "status-pending-text": "#92400E",
+            "surface-container-low": "#eaf5ff",
+            "secondary": "#1c00eb",
+            "on-secondary-container": "#d6d5ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline-sm": ["Montserrat"],
+            "headline-lg": ["Montserrat"],
+            "headline-md": ["Montserrat"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "tabular-numeric": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "body-md": ["Inter"],
+            "label-lg": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-body-md text-[14px] text-on-surface antialiased min-h-screen flex flex-col justify-between">
+<!-- Header / Navigation Bar -->
+<header class="sticky top-0 w-full z-40 bg-surface-card border-b border-border-subtle/80">
+<div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5" href="#">
+<img alt="Logo Controle de Insumos" class="w-8 h-8 rounded-lg object-contain shadow-xs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2dMwVWMa6aveycZ2hkdxztsosq-anUDnDk0c0gEzRjUAHvM0mg_tUFLIQOPhdpJd2AZv3EdF0y309Yk47ro4vIvST2QXqdWW_R98HYPWizSoqokS3rvuk5J58OviH7RibPl4mJqyKYQdbwJxaiiEP-1eJErrSl-GGkH5iUIGR-27bTV4nzijff-PfU5Njf1tc6JhRWcAr0gh8urUVpb4o2oanC4QC0ilogJK7oonxcbcO4UvZjWPZNcevQ3xSRCHyGO4"/>
+<span class="font-headline-sm text-[17px] font-bold text-on-surface tracking-tight">Controle de Insumos</span>
+</a>
+<nav class="hidden md:flex items-center gap-1.5">
+<a class="px-3.5 py-1.5 text-on-surface-variant hover:text-on-surface font-label-md text-[13px] rounded-lg transition-colors" href="#">Painel de Requisições</a>
+<a class="px-3.5 py-1.5 text-on-surface-variant hover:text-on-surface font-label-md text-[13px] rounded-lg transition-colors" href="#">Nova Requisição</a>
+<div class="flex items-center gap-1.5">
+<a aria-current="page" class="px-3.5 py-1.5 bg-primary-container text-on-primary font-label-md text-[13px] rounded-lg font-medium shadow-xs" href="#">Estoque &amp; Materiais</a>
+<span class="px-1.5 py-0.5 rounded bg-status-approved-bg text-status-approved-text text-[10px] font-bold tracking-wider uppercase">ADMIN</span>
+</div>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-[13px]">
+            TI
+          </div>
+<div class="hidden sm:flex flex-col text-right">
+<span class="font-label-md text-[13px] text-on-surface font-semibold leading-tight">Gestor de TI</span>
+<span class="text-[11px] text-on-surface-variant leading-tight">Almoxarifado Central</span>
+</div>
+<span class="hidden sm:inline-block px-1.5 py-0.5 rounded bg-tertiary-fixed-dim text-on-tertiary-fixed text-[11px] font-semibold">Admin</span>
+</div>
+<a class="flex items-center gap-1 text-on-surface-variant hover:text-on-surface text-[13px] p-1.5 rounded-lg transition-colors" href="#" title="Sair">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="w-full max-w-6xl mx-auto px-6 py-8 flex-1">
+<div class="flex flex-col gap-6">
+<!-- Header Direto com Botão de Ação -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-[26px] font-bold text-on-surface tracking-tight">Estoque de Materiais</h1>
+<p class="text-[13px] text-on-surface-variant mt-0.5">Visão consolidada de inventário, reposição e disponibilidade de catálogo.</p>
+</div>
+<div class="flex items-center gap-2.5 self-start sm:self-auto">
+<button class="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-[13px] font-semibold shadow-sm transition-all active:scale-[0.98]" id="btn-open-new-material">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Novo Material</span>
+</button>
+</div>
+</div>
+<!-- Métricas Enxutas (3 Indicadores Compactos na Horizontal) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+<!-- Indicador 1 -->
+<div class="bg-surface-card rounded-xl p-4 border border-border-subtle/80 flex items-center justify-between shadow-xs">
+<div class="flex flex-col">
+<span class="text-[12px] font-medium text-on-surface-variant">Itens Cadastrados</span>
+<div class="flex items-baseline gap-1.5 mt-0.5">
+<span class="font-headline-md text-[22px] font-bold text-on-surface font-tabular-numeric" id="kpi-active-count">6</span>
+<span class="text-[12px] text-on-surface-variant">itens</span>
+</div>
+</div>
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+</div>
+<!-- Indicador 2 -->
+<div class="bg-surface-card rounded-xl p-4 border border-border-subtle/80 flex items-center justify-between shadow-xs">
+<div class="flex flex-col">
+<span class="text-[12px] font-medium text-on-surface-variant">Saldo Total Físico</span>
+<div class="flex items-baseline gap-1.5 mt-0.5">
+<span class="font-headline-md text-[22px] font-bold text-on-surface font-tabular-numeric" id="kpi-volume-total">206</span>
+<span class="text-[12px] text-on-surface-variant">unidades</span>
+</div>
+</div>
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">warehouse</span>
+</div>
+</div>
+<!-- Indicador 3 -->
+<div class="bg-surface-card rounded-xl p-4 border border-border-subtle/80 flex items-center justify-between shadow-xs">
+<div class="flex flex-col">
+<span class="text-[12px] font-medium text-on-surface-variant">Abaixo do Mínimo</span>
+<div class="flex items-baseline gap-1.5 mt-0.5">
+<span class="font-headline-md text-[22px] font-bold text-alert-low-stock-text font-tabular-numeric" id="kpi-critical-count">2</span>
+<span class="text-[12px] text-alert-low-stock-text font-medium">críticos</span>
+</div>
+</div>
+<div class="w-9 h-9 rounded-lg bg-alert-low-stock-bg flex items-center justify-center text-alert-low-stock-text">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+</div>
+</div>
+<!-- Barra de Busca e Filtros Simplificada -->
+<div class="bg-surface-card rounded-xl border border-border-subtle/80 p-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-xs">
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 text-[13px] bg-surface rounded-lg border-0 focus:ring-1 focus:ring-primary focus:bg-white placeholder:text-on-surface-variant/70 text-on-surface transition-colors" id="search-materials" placeholder="Buscar por código, material ou unidade..." type="text"/>
+</div>
+<!-- Tabs Rápidas -->
+<div class="flex items-center gap-1 bg-surface p-1 rounded-lg self-start sm:self-auto border border-border-subtle/40">
+<button class="filter-btn px-3 py-1 text-[12px] font-semibold rounded-md bg-surface-card text-primary shadow-xs transition-all" data-filter="all" type="button">Todos</button>
+<button class="filter-btn px-3 py-1 text-[12px] font-semibold rounded-md text-on-surface-variant hover:text-on-surface transition-all" data-filter="critical" type="button">Críticos</button>
+<button class="filter-btn px-3 py-1 text-[12px] font-semibold rounded-md text-on-surface-variant hover:text-on-surface transition-all" data-filter="inactive" type="button">Inativos</button>
+</div>
+</div>
+<!-- Tabela Limpa e Espaçada -->
+<div class="bg-surface-card rounded-xl border border-border-subtle/80 overflow-hidden shadow-xs">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface/70 border-b border-border-subtle text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant">
+<th class="py-3 px-5" scope="col">Material / Descrição</th>
+<th class="py-3 px-4 text-right" scope="col">Saldo Atual</th>
+<th class="py-3 px-4 text-right" scope="col">Estoque Mín.</th>
+<th class="py-3 px-4 text-center" scope="col">Status</th>
+<th class="py-3 px-5 text-right" scope="col">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle/60 text-[13px]" id="materials-tbody">
+<!-- Item 1: Papel A4 -->
+<tr class="material-row hover:bg-surface-container-low/40 transition-colors" data-active="true" data-code="MAT-0102" data-id="1" data-min="30" data-name="Resma Papel Sulfite A4 75g (500 fls)" data-status="normal" data-stock="142" data-unit="resma">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</div>
+<div>
+<div class="font-medium text-on-surface material-name-text">Resma Papel Sulfite A4 75g (500 fls)</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Cód: MAT-0102 • resma</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right font-semibold font-tabular-numeric text-on-surface">
+<span class="stock-val">142</span>
+</td>
+<td class="py-3.5 px-4 text-right font-tabular-numeric text-on-surface-variant">
+<span class="min-val">30</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-delivered-bg text-status-delivered-text">
+                    Ativo
+                  </span>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded bg-status-approved-bg hover:bg-primary-fixed text-status-approved-text text-[12px] font-semibold transition-colors" title="Entrada de saldo" type="button">
+<span class="material-symbols-outlined text-[15px]">add</span>
+<span>+ Entrada</span>
+</button>
+<button class="btn-edit-material p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors" title="Editar Material" type="button">
+<span class="material-symbols-outlined text-[17px]">edit</span>
+</button>
+<button class="btn-toggle-active p-1.5 text-tertiary hover:text-tertiary-container rounded hover:bg-surface-container transition-colors" title="Alternar status ativo/inativo" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">toggle_on</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Item 2: Toner HP 105A (Crítico) -->
+<tr class="material-row hover:bg-surface-container-low/40 transition-colors bg-alert-low-stock-bg/10" data-active="true" data-code="MAT-0108" data-id="2" data-min="6" data-name="Cartucho Toner HP LaserJet 105A (W1105A)" data-status="critical" data-stock="2" data-unit="un">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-alert-low-stock-bg flex items-center justify-center text-alert-low-stock-text shrink-0">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</div>
+<div>
+<div class="font-medium text-on-surface material-name-text">Cartucho Toner HP LaserJet 105A (W1105A)</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Cód: MAT-0108 • un</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right font-bold font-tabular-numeric text-alert-low-stock-text">
+<span class="inline-flex items-center gap-1 justify-end">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span class="stock-val">2</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right font-tabular-numeric text-on-surface-variant">
+<span class="min-val">6</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-delivered-bg text-status-delivered-text">
+                    Ativo
+                  </span>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary hover:bg-primary-container text-on-primary text-[12px] font-semibold shadow-2xs transition-colors" title="Entrada urgente" type="button">
+<span class="material-symbols-outlined text-[15px]">add</span>
+<span>+ Entrada</span>
+</button>
+<button class="btn-edit-material p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors" title="Editar Material" type="button">
+<span class="material-symbols-outlined text-[17px]">edit</span>
+</button>
+<button class="btn-toggle-active p-1.5 text-tertiary hover:text-tertiary-container rounded hover:bg-surface-container transition-colors" title="Alternar status ativo/inativo" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">toggle_on</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Item 3: Caneta Azul -->
+<tr class="material-row hover:bg-surface-container-low/40 transition-colors" data-active="true" data-code="MAT-0115" data-id="3" data-min="10" data-name="Caneta Esferográfica Média Azul (Caixa 50)" data-status="normal" data-stock="48" data-unit="cx">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</div>
+<div>
+<div class="font-medium text-on-surface material-name-text">Caneta Esferográfica Média Azul (Caixa 50)</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Cód: MAT-0115 • cx</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right font-semibold font-tabular-numeric text-on-surface">
+<span class="stock-val">48</span>
+</td>
+<td class="py-3.5 px-4 text-right font-tabular-numeric text-on-surface-variant">
+<span class="min-val">10</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-delivered-bg text-status-delivered-text">
+                    Ativo
+                  </span>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded bg-status-approved-bg hover:bg-primary-fixed text-status-approved-text text-[12px] font-semibold transition-colors" title="Entrada de saldo" type="button">
+<span class="material-symbols-outlined text-[15px]">add</span>
+<span>+ Entrada</span>
+</button>
+<button class="btn-edit-material p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors" title="Editar Material" type="button">
+<span class="material-symbols-outlined text-[17px]">edit</span>
+</button>
+<button class="btn-toggle-active p-1.5 text-tertiary hover:text-tertiary-container rounded hover:bg-surface-container transition-colors" title="Alternar status ativo/inativo" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">toggle_on</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Item 4: Cabo de Rede (Crítico) -->
+<tr class="material-row hover:bg-surface-container-low/40 transition-colors bg-alert-low-stock-bg/10" data-active="true" data-code="MAT-0204" data-id="4" data-min="15" data-name="Patch Cord UTP RJ45 Cat6 2.0m Azul" data-status="critical" data-stock="4" data-unit="un">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-alert-low-stock-bg flex items-center justify-center text-alert-low-stock-text shrink-0">
+<span class="material-symbols-outlined text-[18px]">lan</span>
+</div>
+<div>
+<div class="font-medium text-on-surface material-name-text">Patch Cord UTP RJ45 Cat6 2.0m Azul</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Cód: MAT-0204 • un</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right font-bold font-tabular-numeric text-alert-low-stock-text">
+<span class="inline-flex items-center gap-1 justify-end">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span class="stock-val">4</span>
+</span>
+</td>
+<td class="py-3.5 px-4 text-right font-tabular-numeric text-on-surface-variant">
+<span class="min-val">15</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-delivered-bg text-status-delivered-text">
+                    Ativo
+                  </span>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary hover:bg-primary-container text-on-primary text-[12px] font-semibold shadow-2xs transition-colors" title="Entrada urgente" type="button">
+<span class="material-symbols-outlined text-[15px]">add</span>
+<span>+ Entrada</span>
+</button>
+<button class="btn-edit-material p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors" title="Editar Material" type="button">
+<span class="material-symbols-outlined text-[17px]">edit</span>
+</button>
+<button class="btn-toggle-active p-1.5 text-tertiary hover:text-tertiary-container rounded hover:bg-surface-container transition-colors" title="Alternar status ativo/inativo" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">toggle_on</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Item 5: Conector Macho RJ45 -->
+<tr class="material-row hover:bg-surface-container-low/40 transition-colors" data-active="true" data-code="MAT-0211" data-id="5" data-min="4" data-name="Kit Conector Macho RJ45 Cat6 (Pacote 100un)" data-status="normal" data-stock="12" data-unit="kit">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">category</span>
+</div>
+<div>
+<div class="font-medium text-on-surface material-name-text">Kit Conector Macho RJ45 Cat6 (Pacote 100un)</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Cód: MAT-0211 • kit</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right font-semibold font-tabular-numeric text-on-surface">
+<span class="stock-val">12</span>
+</td>
+<td class="py-3.5 px-4 text-right font-tabular-numeric text-on-surface-variant">
+<span class="min-val">4</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-delivered-bg text-status-delivered-text">
+                    Ativo
+                  </span>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded bg-status-approved-bg hover:bg-primary-fixed text-status-approved-text text-[12px] font-semibold transition-colors" title="Entrada de saldo" type="button">
+<span class="material-symbols-outlined text-[15px]">add</span>
+<span>+ Entrada</span>
+</button>
+<button class="btn-edit-material p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors" title="Editar Material" type="button">
+<span class="material-symbols-outlined text-[17px]">edit</span>
+</button>
+<button class="btn-toggle-active p-1.5 text-tertiary hover:text-tertiary-container rounded hover:bg-surface-container transition-colors" title="Alternar status ativo/inativo" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">toggle_on</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Item 6: Bloco Adesivo (Inativo) -->
+<tr class="material-row opacity-60 bg-surface/50 hover:bg-surface transition-colors" data-active="false" data-code="MAT-0301" data-id="6" data-min="5" data-name="Bloco de Notas Autoadesivo Amarelo 76x76mm" data-status="normal" data-stock="0" data-unit="un">
+<td class="py-3.5 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-outline shrink-0">
+<span class="material-symbols-outlined text-[18px]">sticky_note_2</span>
+</div>
+<div>
+<div class="font-medium text-on-surface-variant line-through material-name-text">Bloco de Notas Autoadesivo Amarelo 76x76mm</div>
+<div class="text-[11px] text-outline font-mono">Cód: MAT-0301 • un</div>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right font-tabular-numeric text-outline">
+<span class="stock-val">0</span>
+</td>
+<td class="py-3.5 px-4 text-right font-tabular-numeric text-outline">
+<span class="min-val">5</span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-rejected-bg text-status-rejected-text">
+                    Inativo
+                  </span>
+</td>
+<td class="py-3.5 px-5 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container text-outline text-[12px] font-semibold cursor-not-allowed opacity-50" disabled="" title="Item inativo" type="button">
+<span class="material-symbols-outlined text-[15px]">add</span>
+<span>+ Entrada</span>
+</button>
+<button class="btn-edit-material p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors" title="Editar Material" type="button">
+<span class="material-symbols-outlined text-[17px]">edit</span>
+</button>
+<button class="btn-toggle-active p-1.5 text-outline hover:text-primary rounded hover:bg-surface-container transition-colors" title="Reativar material" type="button">
+<span class="material-symbols-outlined text-[20px]">toggle_off</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Rodapé da tabela com contagem -->
+<div class="px-5 py-3 bg-surface/60 border-t border-border-subtle/80 flex items-center justify-between text-[12px] text-on-surface-variant">
+<span id="filtered-records-text">Exibindo 6 itens</span>
+<span class="flex items-center gap-1 text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-status-delivered-text"></span>
+            Saída controlada exclusivamente via requisição aprovada
+          </span>
+</div>
+</div>
+</div>
+</main>
+<!-- Rodapé Discreto -->
+<footer class="w-full bg-surface-card border-t border-border-subtle py-4 mt-8">
+<div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-on-surface-variant text-[12px]">
+<div>© 2025 Controle de Insumos • Gestão de Materiais</div>
+<div class="flex items-center gap-3 text-[11px]">
+<span>Almoxarifado Operacional</span>
+<span>•</span>
+<span>v2.4.0</span>
+</div>
+</div>
+</footer>
+<!-- MODAL: Cadastro de Novo Material -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-xs hidden" id="modal-new-material">
+<div class="bg-surface-card rounded-xl max-w-md w-full p-5 shadow-xl flex flex-col gap-4 border border-border-subtle">
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<h3 class="font-headline-sm text-[16px] font-bold text-on-surface">Novo Material</h3>
+<button class="btn-close-modal text-on-surface-variant hover:text-on-surface p-1 rounded-md" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-3.5" id="form-new-material">
+<div class="flex flex-col gap-1">
+<label class="text-[12px] font-semibold text-on-surface" for="new-mat-name">Descrição do Material *</label>
+<input class="px-3 py-1.5 text-[13px] rounded-lg bg-surface border border-border-subtle focus:bg-white focus:ring-1 focus:ring-primary outline-none" id="new-mat-name" placeholder="Ex: Grampeador Médio 26/6" required="" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="text-[12px] font-semibold text-on-surface" for="new-mat-unit">Unidade *</label>
+<select class="px-3 py-1.5 text-[13px] rounded-lg bg-surface border border-border-subtle focus:bg-white focus:ring-1 focus:ring-primary outline-none" id="new-mat-unit">
+<option value="un">un (Unidade)</option>
+<option value="resma">resma (Resma)</option>
+<option value="cx">cx (Caixa)</option>
+<option value="kit">kit (Conjunto)</option>
+<option value="pct">pct (Pacote)</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[12px] font-semibold text-on-surface" for="new-mat-min">Estoque Mínimo *</label>
+<input class="px-3 py-1.5 text-[13px] rounded-lg bg-surface border border-border-subtle focus:bg-white focus:ring-1 focus:ring-primary outline-none" id="new-mat-min" min="0" required="" type="number" value="5"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[12px] font-semibold text-on-surface" for="new-mat-stock">Saldo Inicial *</label>
+<input class="px-3 py-1.5 text-[13px] rounded-lg bg-surface border border-border-subtle focus:bg-white focus:ring-1 focus:ring-primary outline-none" id="new-mat-stock" min="0" required="" type="number" value="10"/>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2 border-t border-border-subtle">
+<button class="btn-close-modal px-3.5 py-1.5 text-[13px] text-on-surface-variant hover:text-on-surface rounded-lg" type="button">Cancelar</button>
+<button class="px-4 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-semibold text-[13px] shadow-xs" type="submit">Salvar Insumo</button>
+</div>
+</form>
+</div>
+</div>
+<!-- MODAL: Entrada de Estoque (Adicionar Saldo) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-xs hidden" id="modal-stock-entry">
+<div class="bg-surface-card rounded-xl max-w-sm w-full p-5 shadow-xl flex flex-col gap-4 border border-border-subtle">
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<h3 class="font-headline-sm text-[16px] font-bold text-on-surface">Lançar Entrada de Saldo</h3>
+<button class="btn-close-stock-entry text-on-surface-variant hover:text-on-surface p-1 rounded-md" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="bg-surface p-3 rounded-lg flex flex-col gap-0.5 border border-border-subtle/50">
+<span class="text-[11px] font-medium text-on-surface-variant">Material:</span>
+<span class="text-[13px] font-semibold text-on-surface truncate" id="stock-entry-mat-name">...</span>
+<span class="text-[12px] text-on-surface-variant mt-1">Saldo atual: <strong class="text-on-surface" id="stock-entry-current-val">0</strong></span>
+</div>
+<form class="flex flex-col gap-3.5" id="form-stock-entry">
+<input id="stock-entry-id" type="hidden"/>
+<div class="flex flex-col gap-1">
+<label class="text-[12px] font-semibold text-on-surface" for="stock-entry-qty">Quantidade a Adicionar *</label>
+<input class="px-3 py-1.5 text-[13px] rounded-lg bg-surface border border-border-subtle focus:bg-white focus:ring-1 focus:ring-primary outline-none" id="stock-entry-qty" min="1" required="" type="number" value="10"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[12px] font-semibold text-on-surface" for="stock-entry-reason">Nota Fiscal ou Referência (Opcional)</label>
+<input class="px-3 py-1.5 text-[13px] rounded-lg bg-surface border border-border-subtle focus:bg-white focus:ring-1 focus:ring-primary outline-none" id="stock-entry-reason" placeholder="Ex: NF 1024 / Reposição Semanal" type="text"/>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2 border-t border-border-subtle">
+<button class="btn-close-stock-entry px-3.5 py-1.5 text-[13px] text-on-surface-variant hover:text-on-surface rounded-lg" type="button">Cancelar</button>
+<button class="px-4 py-1.5 rounded-lg bg-tertiary-container hover:bg-tertiary text-on-primary font-semibold text-[13px] shadow-xs" type="submit">Confirmar Entrada</button>
+</div>
+</form>
+</div>
+</div>
+<!-- MODAL: Editar Insumo -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-xs hidden" id="modal-edit-material">
+<div class="bg-surface-card rounded-xl max-w-sm w-full p-5 shadow-xl flex flex-col gap-4 border border-border-subtle">
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<h3 class="font-headline-sm text-[16px] font-bold text-on-surface">Editar Insumo</h3>
+<button class="btn-close-edit text-on-surface-variant hover:text-on-surface p-1 rounded-md" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-3.5" id="form-edit-material">
+<input id="edit-mat-id" type="hidden"/>
+<div class="flex flex-col gap-1">
+<label class="text-[12px] font-semibold text-on-surface" for="edit-mat-name">Descrição *</label>
+<input class="px-3 py-1.5 text-[13px] rounded-lg bg-surface border border-border-subtle focus:bg-white focus:ring-1 focus:ring-primary outline-none" id="edit-mat-name" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-[12px] font-semibold text-on-surface" for="edit-mat-min">Estoque Mínimo *</label>
+<input class="px-3 py-1.5 text-[13px] rounded-lg bg-surface border border-border-subtle focus:bg-white focus:ring-1 focus:ring-primary outline-none" id="edit-mat-min" min="0" required="" type="number"/>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2 border-t border-border-subtle">
+<button class="btn-close-edit px-3.5 py-1.5 text-[13px] text-on-surface-variant hover:text-on-surface rounded-lg" type="button">Cancelar</button>
+<button class="px-4 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-semibold text-[13px] shadow-xs" type="submit">Salvar</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Toast Notificação -->
+<div class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-200 pointer-events-none flex items-center gap-2 px-4 py-2.5 rounded-lg bg-on-surface text-surface font-medium text-[13px] shadow-lg" id="toast">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed" id="toast-icon">check_circle</span>
+<span id="toast-message">Operação concluída.</span>
+</div>
+<!-- JavaScript Logics -->
+<script>
+    (function() {
+      const tbody = document.getElementById('materials-tbody');
+      const searchInput = document.getElementById('search-materials');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      const toastIcon = document.getElementById('toast-icon');
+
+      const modalNew = document.getElementById('modal-new-material');
+      const modalStock = document.getElementById('modal-stock-entry');
+      const modalEdit = document.getElementById('modal-edit-material');
+      const btnOpenNew = document.getElementById('btn-open-new-material');
+
+      let currentFilter = 'all';
+
+      function showToast(text, isError = false) {
+        toastMsg.textContent = text;
+        toastIcon.textContent = isError ? 'error' : 'check_circle';
+        toastIcon.className = 'material-symbols-outlined text-[18px] ' + (isError ? 'text-status-rejected-text' : 'text-tertiary-fixed');
+        toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        }, 2800);
+      }
+
+      function updateKPIsAndFiltering() {
+        const rows = Array.from(tbody.querySelectorAll('.material-row'));
+        const query = searchInput.value.toLowerCase().trim();
+
+        let activeCount = 0;
+        let criticalCount = 0;
+        let volumeTotal = 0;
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+          const name = row.getAttribute('data-name').toLowerCase();
+          const code = (row.getAttribute('data-code') || '').toLowerCase();
+          const stock = parseInt(row.getAttribute('data-stock'), 10) || 0;
+          const min = parseInt(row.getAttribute('data-min'), 10) || 0;
+          const isActive = row.getAttribute('data-active') === 'true';
+          const isCritical = stock <= min && isActive;
+
+          if (isActive) {
+            activeCount++;
+            volumeTotal += stock;
+            if (isCritical) criticalCount++;
+          }
+
+          let matchesTab = true;
+          if (currentFilter === 'critical') matchesTab = isCritical;
+          if (currentFilter === 'inactive') matchesTab = !isActive;
+
+          const matchesSearch = !query || name.includes(query) || code.includes(query);
+          const show = matchesTab && matchesSearch;
+
+          row.style.display = show ? '' : 'none';
+          if (show) visibleCount++;
+        });
+
+        document.getElementById('kpi-active-count').textContent = activeCount;
+        document.getElementById('kpi-volume-total').textContent = volumeTotal.toLocaleString('pt-BR');
+        document.getElementById('kpi-critical-count').textContent = criticalCount;
+        document.getElementById('filtered-records-text').textContent = `Exibindo ${visibleCount} de ${rows.length} itens`;
+      }
+
+      // Modais: Novo Material
+      btnOpenNew.addEventListener('click', () => modalNew.classList.remove('hidden'));
+      document.querySelectorAll('.btn-close-modal').forEach(b => b.addEventListener('click', () => modalNew.classList.add('hidden')));
+
+      document.getElementById('form-new-material').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('new-mat-name').value.trim();
+        const unit = document.getElementById('new-mat-unit').value;
+        const min = parseInt(document.getElementById('new-mat-min').value, 10) || 0;
+        const stock = parseInt(document.getElementById('new-mat-stock').value, 10) || 0;
+        const newId = Date.now();
+        const code = `MAT-${Math.floor(1000 + Math.random() * 9000)}`;
+        const isCritical = stock <= min;
+
+        const tr = document.createElement('tr');
+        tr.className = `material-row hover:bg-surface-container-low/40 transition-colors ${isCritical ? 'bg-alert-low-stock-bg/10' : ''}`;
+        tr.setAttribute('data-id', newId);
+        tr.setAttribute('data-name', name);
+        tr.setAttribute('data-code', code);
+        tr.setAttribute('data-stock', stock);
+        tr.setAttribute('data-min', min);
+        tr.setAttribute('data-unit', unit);
+        tr.setAttribute('data-active', 'true');
+        tr.setAttribute('data-status', isCritical ? 'critical' : 'normal');
+
+        tr.innerHTML = `
+          <td class="py-3.5 px-5">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-lg ${isCritical ? 'bg-alert-low-stock-bg text-alert-low-stock-text' : 'bg-surface-container text-primary'} flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-[18px]">${unit === 'resma' ? 'description' : 'category'}</span>
+              </div>
+              <div>
+                <div class="font-medium text-on-surface material-name-text">${name}</div>
+                <div class="text-[11px] text-on-surface-variant font-mono">Cód: ${code} • ${unit}</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-right font-tabular-numeric ${isCritical ? 'font-bold text-alert-low-stock-text' : 'font-semibold text-on-surface'}">
+            ${isCritical ? `<span class="inline-flex items-center gap-1 justify-end"><span class="material-symbols-outlined text-[14px]">warning</span><span class="stock-val">${stock}</span></span>` : `<span class="stock-val">${stock}</span>`}
+          </td>
+          <td class="py-3.5 px-4 text-right font-tabular-numeric text-on-surface-variant">
+            <span class="min-val">${min}</span>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-delivered-bg text-status-delivered-text">
+              Ativo
+            </span>
+          </td>
+          <td class="py-3.5 px-5 text-right">
+            <div class="flex items-center justify-end gap-1">
+              <button type="button" class="btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded ${isCritical ? 'bg-primary hover:bg-primary-container text-on-primary' : 'bg-status-approved-bg hover:bg-primary-fixed text-status-approved-text'} text-[12px] font-semibold transition-colors" title="Entrada de saldo">
+                <span class="material-symbols-outlined text-[15px]">add</span>
+                <span>+ Entrada</span>
+              </button>
+              <button type="button" class="btn-edit-material p-1.5 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container transition-colors" title="Editar Material">
+                <span class="material-symbols-outlined text-[17px]">edit</span>
+              </button>
+              <button type="button" class="btn-toggle-active p-1.5 text-tertiary hover:text-tertiary-container rounded hover:bg-surface-container transition-colors" title="Alternar status ativo/inativo">
+                <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">toggle_on</span>
+              </button>
+            </div>
+          </td>
+        `;
+
+        tbody.prepend(tr);
+        bindRowEvents(tr);
+        modalNew.classList.add('hidden');
+        document.getElementById('form-new-material').reset();
+        updateKPIsAndFiltering();
+        showToast('Material adicionado com sucesso!');
+      });
+
+      // Modais: Entrada de Estoque
+      function openStockModal(id, name, currentStock) {
+        document.getElementById('stock-entry-id').value = id;
+        document.getElementById('stock-entry-mat-name').textContent = name;
+        document.getElementById('stock-entry-current-val').textContent = currentStock;
+        document.getElementById('stock-entry-qty').value = '10';
+        modalStock.classList.remove('hidden');
+      }
+
+      document.querySelectorAll('.btn-close-stock-entry').forEach(b => b.addEventListener('click', () => modalStock.classList.add('hidden')));
+
+      document.getElementById('form-stock-entry').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('stock-entry-id').value;
+        const addQty = parseInt(document.getElementById('stock-entry-qty').value, 10) || 0;
+        if (addQty <= 0) return;
+
+        const row = tbody.querySelector(`.material-row[data-id="${id}"]`);
+        if (row) {
+          const current = parseInt(row.getAttribute('data-stock'), 10) || 0;
+          const min = parseInt(row.getAttribute('data-min'), 10) || 0;
+          const newStock = current + addQty;
+          row.setAttribute('data-stock', newStock);
+
+          const isCritical = newStock <= min;
+          row.setAttribute('data-status', isCritical ? 'critical' : 'normal');
+
+          const stockTd = row.children[1];
+          if (isCritical) {
+            row.classList.add('bg-alert-low-stock-bg/10');
+            stockTd.className = 'py-3.5 px-4 text-right font-bold font-tabular-numeric text-alert-low-stock-text';
+            stockTd.innerHTML = `<span class="inline-flex items-center gap-1 justify-end"><span class="material-symbols-outlined text-[14px]">warning</span><span class="stock-val">${newStock}</span></span>`;
+          } else {
+            row.classList.remove('bg-alert-low-stock-bg/10');
+            stockTd.className = 'py-3.5 px-4 text-right font-semibold font-tabular-numeric text-on-surface';
+            stockTd.innerHTML = `<span class="stock-val">${newStock}</span>`;
+            
+            const btnEntry = row.querySelector('.btn-stock-entry');
+            if (btnEntry) {
+              btnEntry.className = 'btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded bg-status-approved-bg hover:bg-primary-fixed text-status-approved-text text-[12px] font-semibold transition-colors';
+            }
+          }
+        }
+
+        modalStock.classList.add('hidden');
+        updateKPIsAndFiltering();
+        showToast(`+${addQty} itens adicionados ao saldo com sucesso!`);
+      });
+
+      // Modais: Editar
+      function openEditModal(id, name, min) {
+        document.getElementById('edit-mat-id').value = id;
+        document.getElementById('edit-mat-name').value = name;
+        document.getElementById('edit-mat-min').value = min;
+        modalEdit.classList.remove('hidden');
+      }
+
+      document.querySelectorAll('.btn-close-edit').forEach(b => b.addEventListener('click', () => modalEdit.classList.add('hidden')));
+
+      document.getElementById('form-edit-material').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('edit-mat-id').value;
+        const newName = document.getElementById('edit-mat-name').value.trim();
+        const newMin = parseInt(document.getElementById('edit-mat-min').value, 10) || 0;
+
+        const row = tbody.querySelector(`.material-row[data-id="${id}"]`);
+        if (row) {
+          row.setAttribute('data-name', newName);
+          row.setAttribute('data-min', newMin);
+          row.querySelector('.material-name-text').textContent = newName;
+          row.querySelector('.min-val').textContent = newMin;
+
+          const stock = parseInt(row.getAttribute('data-stock'), 10) || 0;
+          const isCritical = stock <= newMin;
+          row.setAttribute('data-status', isCritical ? 'critical' : 'normal');
+
+          const stockTd = row.children[1];
+          if (isCritical) {
+            row.classList.add('bg-alert-low-stock-bg/10');
+            stockTd.className = 'py-3.5 px-4 text-right font-bold font-tabular-numeric text-alert-low-stock-text';
+            stockTd.innerHTML = `<span class="inline-flex items-center gap-1 justify-end"><span class="material-symbols-outlined text-[14px]">warning</span><span class="stock-val">${stock}</span></span>`;
+          } else {
+            row.classList.remove('bg-alert-low-stock-bg/10');
+            stockTd.className = 'py-3.5 px-4 text-right font-semibold font-tabular-numeric text-on-surface';
+            stockTd.innerHTML = `<span class="stock-val">${stock}</span>`;
+          }
+        }
+
+        modalEdit.classList.add('hidden');
+        updateKPIsAndFiltering();
+        showToast('Material atualizado com sucesso!');
+      });
+
+      // Toggle Ativo / Inativo (Soft Delete)
+      function toggleActiveStatus(id) {
+        const row = tbody.querySelector(`.material-row[data-id="${id}"]`);
+        if (!row) return;
+
+        const currentActive = row.getAttribute('data-active') === 'true';
+        const newActive = !currentActive;
+        row.setAttribute('data-active', newActive ? 'true' : 'false');
+
+        const nameEl = row.querySelector('.material-name-text');
+        const badge = row.querySelector('.badge-status');
+        const btnEntry = row.querySelector('.btn-stock-entry');
+        const toggleIcon = row.querySelector('.btn-toggle-active span');
+
+        if (newActive) {
+          row.classList.remove('opacity-60', 'bg-surface/50');
+          nameEl.classList.remove('line-through', 'text-on-surface-variant');
+          nameEl.classList.add('text-on-surface');
+          badge.className = 'badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-delivered-bg text-status-delivered-text';
+          badge.textContent = 'Ativo';
+          btnEntry.removeAttribute('disabled');
+          btnEntry.classList.remove('cursor-not-allowed', 'bg-surface-container', 'text-outline', 'opacity-50');
+          btnEntry.classList.add('bg-status-approved-bg', 'text-status-approved-text');
+          toggleIcon.textContent = 'toggle_on';
+          toggleIcon.parentElement.className = 'btn-toggle-active p-1.5 text-tertiary hover:text-tertiary-container rounded hover:bg-surface-container transition-colors';
+          showToast('Material reativado no catálogo.');
+        } else {
+          row.classList.add('opacity-60', 'bg-surface/50');
+          nameEl.classList.add('line-through', 'text-on-surface-variant');
+          badge.className = 'badge-status inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-status-rejected-bg text-status-rejected-text';
+          badge.textContent = 'Inativo';
+          btnEntry.setAttribute('disabled', 'true');
+          btnEntry.className = 'btn-stock-entry inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container text-outline text-[12px] font-semibold cursor-not-allowed opacity-50';
+          toggleIcon.textContent = 'toggle_off';
+          toggleIcon.parentElement.className = 'btn-toggle-active p-1.5 text-outline hover:text-primary rounded hover:bg-surface-container transition-colors';
+          showToast('Material marcado como inativo.');
+        }
+
+        updateKPIsAndFiltering();
+      }
+
+      function bindRowEvents(row) {
+        const id = row.getAttribute('data-id');
+        row.querySelector('.btn-stock-entry')?.addEventListener('click', () => {
+          if (row.getAttribute('data-active') !== 'true') return;
+          openStockModal(id, row.getAttribute('data-name'), row.getAttribute('data-stock'));
+        });
+
+        row.querySelector('.btn-edit-material')?.addEventListener('click', () => {
+          openEditModal(id, row.getAttribute('data-name'), row.getAttribute('data-min'));
+        });
+
+        row.querySelector('.btn-toggle-active')?.addEventListener('click', () => {
+          toggleActiveStatus(id);
+        });
+      }
+
+      tbody.querySelectorAll('.material-row').forEach(bindRowEvents);
+
+      // Busca e Tabs
+      searchInput.addEventListener('input', updateKPIsAndFiltering);
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('bg-surface-card', 'text-primary', 'shadow-xs');
+            b.classList.add('text-on-surface-variant');
+          });
+          btn.classList.add('bg-surface-card', 'text-primary', 'shadow-xs');
+          btn.classList.remove('text-on-surface-variant');
+          currentFilter = btn.getAttribute('data-filter');
+          updateKPIsAndFiltering();
+        });
+      });
+
+      updateKPIsAndFiltering();
+    })();
+  </script>
+</body></html>
