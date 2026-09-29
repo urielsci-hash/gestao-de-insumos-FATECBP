@@ -14,96 +14,43 @@
     }
     ::-webkit-scrollbar { display: none; }
   </style>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          "colors": {
-            "surface-container": "#dff0ff",
-            "surface-dim": "#b4e0ff",
-            "error-container": "#ffdad6",
-            "outline-variant": "#c4c5d7",
-            "secondary-fixed": "#e1e0ff",
-            "secondary-fixed-dim": "#c0c1ff",
-            "status-rejected-bg": "#FEE2E2",
-            "secondary-container": "#3d3aff",
-            "alert-low-stock-text": "#C2410C",
-            "surface-container-high": "#d3ebff",
-            "inverse-on-surface": "#e4f3ff",
-            "tertiary-fixed": "#c2f097",
-            "status-rejected-text": "#991B1B",
-            "surface-card": "#FFFFFF",
-            "border-subtle": "#E2E8F0",
-            "surface-variant": "#c7e7ff",
-            "surface-page": "#F6F8FA",
-            "on-secondary-fixed-variant": "#1c00eb",
-            "error": "#ba1a1a",
-            "surface-bright": "#f6faff",
-            "surface-container-lowest": "#ffffff",
-            "on-primary-fixed-variant": "#0038b8",
-            "status-approved-text": "#3730A3",
-            "inverse-surface": "#00344c",
-            "on-secondary": "#ffffff",
-            "on-surface-variant": "#434654",
-            "on-tertiary-container": "#020700",
-            "on-tertiary-fixed-variant": "#2b5007",
-            "status-pending-bg": "#FEF3C7",
-            "primary-fixed": "#dde1ff",
-            "on-error": "#ffffff",
-            "alert-low-stock-bg": "#FFEDD5",
-            "outline": "#747686",
-            "tertiary-container": "#5a8236",
-            "primary": "#214ed7",
-            "on-primary-container": "#fffbff",
-            "on-tertiary": "#ffffff",
-            "surface-tint": "#2551d9",
-            "on-primary": "#ffffff",
-            "on-primary-fixed": "#001453",
-            "tertiary": "#426820",
-            "on-tertiary-fixed": "#0d2000",
-            "surface-container-highest": "#c7e7ff",
-            "background": "#f6faff",
-            "on-error-container": "#93000a",
-            "tertiary-fixed-dim": "#a7d47e",
-            "neutral-tint": "#C7D0C5",
-            "status-delivered-bg": "#DCFCE7",
-            "on-surface": "#001e2e",
-            "status-approved-bg": "#E0E7FF",
-            "status-delivered-text": "#166534",
-            "primary-container": "#4369f1",
-            "on-secondary-fixed": "#07006c",
-            "surface": "#f6faff",
-            "inverse-primary": "#b7c4ff",
-            "on-background": "#001e2e",
-            "primary-fixed-dim": "#b7c4ff",
-            "status-pending-text": "#92400E",
-            "surface-container-low": "#eaf5ff",
-            "secondary": "#1c00eb",
-            "on-secondary-container": "#d6d5ff"
-          },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "full": "9999px"
-          },
-          "fontFamily": {
-            "headline-sm": ["Montserrat"],
-            "headline-lg": ["Montserrat"],
-            "headline-md": ["Montserrat"],
-            "body-sm": ["Inter"],
-            "body-lg": ["Inter"],
-            "tabular-numeric": ["Inter"],
-            "label-sm": ["Inter"],
-            "label-md": ["Inter"],
-            "body-md": ["Inter"],
-            "label-lg": ["Inter"]
-          }
-        }
+<script type="module">
+    import { supabase } from './js/supabase.js';
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) window.location.href = 'painel.html';
+    });
+
+    window.togglePasswordVisibility = function() {
+      const p = document.getElementById('corporatePassword');
+      const e = document.getElementById('eyeIcon');
+      if (p.type === 'password') { p.type = 'text'; e.textContent = 'visibility_off'; } 
+      else { p.type = 'password'; e.textContent = 'visibility'; }
+    }
+
+    window.fillProfile = function(role) {
+      document.getElementById('corporateEmail').value = role === 'admin' ? 'admin.ti@insumos.org' : 'colaborador@insumos.org';
+      document.getElementById('corporatePassword').value = role === 'admin' ? 'Gestor#TI2024!' : 'Requisicao#2024';
+    }
+
+    window.handleLoginSubmit = async function() {
+      const email = document.getElementById('corporateEmail').value;
+      const password = document.getElementById('corporatePassword').value;
+      const btn = document.getElementById('btnSubmit');
+      
+      if (!email || !password) return;
+      btn.innerHTML = 'Entrando...';
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      
+      if (error) {
+        btn.innerHTML = 'Erro no Login';
+        alert('E-mail ou senha inválidos.');
+      } else {
+        btn.innerHTML = 'Acesso Autorizado!';
+        window.location.href = 'painel.html';
       }
-    };
+    }
   </script>
 </head>
 <body class="bg-surface font-body-md text-[14px] text-on-surface antialiased min-h-screen flex flex-col justify-between">
