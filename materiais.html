@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estoque - Controle de Insumos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f6faff] min-h-screen font-['Inter'] text-gray-900">
+  
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-20 shadow-sm">
+    <div class="max-w-[1200px] mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#466CF4] text-[24px]">inventory_2</span>
+        <h1 class="font-['Montserrat'] font-bold text-lg">Catálogo de Estoque</h1>
+      </div>
+      <button id="btnLogout" class="text-gray-500 hover:text-gray-900 flex items-center gap-1 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <span class="material-symbols-outlined text-[20px]">logout</span> Sair
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-[1200px] mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold font-['Montserrat']">Materiais Cadastrados</h2>
+      <button class="bg-[#466CF4] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 flex items-center gap-1">
+        <span class="material-symbols-outlined text-[18px]">add</span> Novo Material
+      </button>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+      <table class="w-full text-left">
+        <thead class="bg-gray-50 border-b border-gray-200 text-xs text-gray-500 uppercase tracking-wider">
+          <tr>
+            <th class="p-4 font-semibold">Nome do Material</th>
+            <th class="p-4 font-semibold">Unidade</th>
+            <th class="p-4 font-semibold">Saldo Atual</th>
+            <th class="p-4 font-semibold text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody id="materialsTbody" class="divide-y divide-gray-100">
+          <tr><td colspan="4" class="p-8 text-center text-gray-500 flex flex-col items-center gap-2">
+            <span class="material-symbols-outlined animate-spin">progress_activity</span> Carregando estoque do Supabase...
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script type="module">
+    import { supabase } from './js/supabase.js';
+    
+    document.getElementById('btnLogout').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      window.location.href = 'index.html';
+    });
+
+    async function loadApp() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const { data, error } = await supabase.from('materiais').select('*').order('nome');
+      const tbody = document.getElementById('materialsTbody');
+      
+      if (error) {
+        console.error(error);
+        tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-red-600 font-medium">Erro ao carregar o estoque. Verifique se o SQL foi rodado no Supabase.</td></tr>`;
+        return;
+      }
+      
+      if (!data || data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-gray-500 font-medium">Nenhum material encontrado no estoque.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = data.map(m => {
+        const isCritical = m.saldo <= m.estoque_min;
+        const statusBadge = m.ativo 
+          ? `<span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700 font-semibold">Ativo</span>`
+          : `<span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-700 font-semibold">Inativo</span>`;
+        
+        const saldoColor = isCritical ? 'text-red-600 font-bold' : 'text-blue-700 font-bold';
+        const saldoWarning = isCritical ? `<span class="material-symbols-outlined text-[14px] text-red-600 ml-1" title="Estoque Baixo">warning</span>` : '';
+
+        return `
+          <tr class="hover:bg-gray-50 transition-colors">
+            <td class="p-4 text-sm text-gray-900 font-medium">${m.nome}</td>
+            <td class="p-4 text-sm text-gray-500">${m.unidade}</td>
+            <td class="p-4 text-sm flex items-center">
+              <span class="${saldoColor} bg-blue-50 px-2 py-0.5 rounded">${m.saldo}</span> 
+              ${saldoWarning}
+            </td>
+            <td class="p-4 text-center">${statusBadge}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    loadApp();
+  </script>
+</body>
+</html>
